@@ -1,11 +1,16 @@
-import RoutesApp from './routes'
+import { BrowserRouter, Routes } from 'react-router-dom';
+import RoutesApp from './routes';
+import AuthProvider from './contexts/auth';
 import './estilo.css'
 
-function App() {
-    return(
+export default function App() {
+
+  return (
+    <BrowserRouter>
+      <AuthProvider>
         <RoutesApp />
-    )
-   
+      </AuthProvider>
+    </BrowserRouter>
+  );
 }
 
-export default App
