@@ -4,17 +4,19 @@ import { AuthContext } from '../../contexts/auth'
 import './signin.css'
 import logo from '../../assets/logo.png'
 
+
+
 export default function SignIn() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const { signIn } = useContext(AuthContext)
+    const { signIn, loadingAuth } = useContext(AuthContext)
 
-    function handleSignIn(evento) {
+    async function handleSignIn(evento) {
         evento.preventDefault()
 
-        if( email !== '' && password !== '') {
-            signIn(email, password)
+        if (email !== '' && password !== '') {
+            await signIn(email, password)
         }
 
     }
@@ -40,14 +42,15 @@ export default function SignIn() {
                         onChange={(evento) => setPassword(evento.target.value)}
                     />
 
-                    <input type="submit" value='Acessar' />
+                    <button type='submit'>
+                        {loadingAuth ? "Carregando" : "Acessar"}
 
+                    </button>
                 </form>
 
                 <Link to='/register'> Crie uma conta </Link>
-              
-            </div>
 
+            </div>
         </div>
     );
 }
